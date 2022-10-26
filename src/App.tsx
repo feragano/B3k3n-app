@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header mainText='B3k3n App' subText='Categorize your favorite book here!' />
       <Category />
     </>
   );

@@ -1,75 +1,46 @@
-import axios from "axios";
+
 import { useEffect, useState } from "react";
+
+type CategoryProps = {
+    category: string;
+    setCategory: (category: string) => void;
+}
 
 export const Category: React.FC = () => {
 
-    const [category, setCategory] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const response = await fetch('https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories', { mode: 'no-cors' });
-    //         const data = await response.json();
-    //         console.log(data)
-    //         setCategory(data);
-    //     }
-    //     fetchData().catch(console.error);;
-    // }, [])
-
-    // useEffect(() => {
-
-    //     axios
-    //         .get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories", { headers: { 'Access-Control-Allow-Origin': '*' } })
-    //         .then((res) => {
-    //             setCategory(res.data);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-
-
-
-    // }, []);
+    const [category, setCategory] = useState<CategoryProps[]>([]);
 
     useEffect(() => {
         const fetchURL = 'https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories';
         const options: object = {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                Accept: 'application/json'
+                'Content-Type': 'plain/text',
+                Accept: 'plain/text',
             },
+            cache: 'default',
+            mode: 'no-cors',
         };
 
-        fetch(fetchURL, options)
-            .then((res) => {
-                console.log(res.json);
-                return res.json()
-            })
-            .then((data) => {
-                console.log(data);
-                setCategory(data);
-            })
-            .catch((error) => {
-                console.error(error)
-            });
-    }, [])
+        const fetchData = async () => {
+            const response = await fetch(fetchURL, options);
+            console.log(response)
+            const data = await response.text();
+            console.log(data)
+            const result = data === '' ? [] : JSON.parse(data);
+            console.log(result)
+            return result
+                ;
+        }
 
-    // useEffect(() => {
-    //     const fetchData: Function = async () => {
-    //         let res = await axios.get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories", {
-    //             headers: {
-    //                 'Access-Control-Allow-Origin': '*',
-    //                 'Content-Type': 'application/json',
-    //             }
-    //         });
-    //         let data = await res.data;
-    //         console.log(data)
-    //         setCategory(data);
-    //     };
+        fetchData().then((data) => {
+            setCategory(data);
+            console.log(category);
+        });
 
-    //     fetchData().catch(console.error);
-    // }, [])
+    }, []);
+
+
 
     return (
         <>
