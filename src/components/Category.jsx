@@ -3,47 +3,12 @@ import { useEffect, useState } from "react";
 export const Category = () => {
   const [category, setCategory] = useState([]);
 
+  const fetchURL =
+    "https://limitless-scrubland-76131.herokuapp.com/https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories";
   useEffect(() => {
-    const fetchURL =
-      "https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories";
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "plain/text",
-        Accept: "plain/text",
-        "Content-Encoding": "gzip",
-      },
-      cache: "default",
-      mode: "no-cors",
-    };
-
-    // const fetchData = async () => {
-    //   const response = await fetch(fetchURL, options);
-    //   console.log(response);
-    //   const data = await response.json();
-    //   console.log(data);
-    //   const result = data === "" ? [] : JSON.parse(data);
-    //   console.log(result);
-    //   return result;
-    // };
-
-    // fetchData().then((data) => {
-    //   setCategory(data);
-    //   console.log(data);
-    // });
-
-    // fetch("http://example.com/movies.json")
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
-
     const handleFetch = async () => {
       try {
-        const response = await fetch(
-          "https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories",
-          {
-            mode: "no-cors",
-          }
-        );
+        const response = await fetch(fetchURL);
         console.log("test");
         const data = await response.json();
         console.log(data);
