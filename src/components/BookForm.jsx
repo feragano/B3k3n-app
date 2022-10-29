@@ -1,12 +1,15 @@
 import { useRef, useState } from "react";
 import "./css/BookForm.css";
-import { Table } from "./Table";
+import { useNavigate } from "react-router-dom";
 
-export const BookForm = () => {
+export const BookForm = ({ childToParent }) => {
   const [data, setData] = useState([]);
+
   const categoryIdRef = useRef();
   const pageRef = useRef();
   const sizeRef = useRef();
+
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,8 +37,13 @@ export const BookForm = () => {
         const response = await fetch(postURL, options);
         const result = await response.json();
         setData(result);
+        childToParent(result);
         console.log(data);
+        navigate("/table");
       } catch (err) {
+        alert(
+          "We didn't find any data or you might enter a non-available category ID!"
+        );
         throw err;
       }
     })();
@@ -116,12 +124,12 @@ export const BookForm = () => {
           <button
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={() => childToParent(1)}
           >
             Submit
           </button>
         </form>
       </div>
-      <Table bookFormToTable={data} />
     </>
   );
 };
