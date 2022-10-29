@@ -1,10 +1,8 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import "./css/BookForm.css";
 import { useNavigate } from "react-router-dom";
 
 export const BookForm = ({ childToParent }) => {
-  const [data, setData] = useState([]);
-
   const categoryIdRef = useRef();
   const pageRef = useRef();
   const sizeRef = useRef();
@@ -36,9 +34,9 @@ export const BookForm = ({ childToParent }) => {
       try {
         const response = await fetch(postURL, options);
         const result = await response.json();
-        setData(result);
+
         childToParent(result);
-        console.log(data);
+
         navigate("/table");
       } catch (err) {
         alert(
@@ -121,14 +119,26 @@ export const BookForm = ({ childToParent }) => {
               page
             </p>
           </div>
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={() => childToParent(1)}
-          >
-            Submit
-          </button>
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-max sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Submit
+            </button>
+          </div>
         </form>
+        <p className="text-gray-500 dark:text-gray-400 mt-4 text-center">
+          Click{" "}
+          <a
+            href="/bookmark"
+            className="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline"
+            onClick={() => navigate("/bookmark")}
+          >
+            here
+          </a>{" "}
+          to go to the bookmark page
+        </p>
       </div>
     </>
   );

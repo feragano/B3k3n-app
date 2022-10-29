@@ -9,9 +9,9 @@ export const Category = ({ titleText }) => {
     (async () => {
       try {
         const response = await fetch(fetchURL);
-        console.log("test");
+
         const data = await response.json();
-        console.log(data);
+
         setCategory(data);
       } catch (err) {
         throw err;
