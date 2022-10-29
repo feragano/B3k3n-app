@@ -22,7 +22,6 @@ export const Bookmark = ({ tableDataToBookmark }) => {
           <thead>
             <tr>
               <th>No</th>
-              <th>ID</th>
               <th>Title</th>
               <th>Authors</th>
               <th>Description</th>
@@ -32,9 +31,8 @@ export const Bookmark = ({ tableDataToBookmark }) => {
           <tbody>
             {tableDataToBookmark.map((data, i) => {
               return (
-                <tr>
+                <tr key={i}>
                   <td>{i + 1}</td>
-                  <td>{data.id}</td>
                   <td>{data.title}</td>
                   <td>{data.authors}</td>
                   <td>{data.description}</td>

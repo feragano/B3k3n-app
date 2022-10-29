@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 
 export const Category = ({ titleText }) => {
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState(() => {
+    const saved = localStorage.getItem("category");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
 
   const fetchURL =
     "https://limitless-scrubland-76131.herokuapp.com/https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories";
@@ -13,6 +17,8 @@ export const Category = ({ titleText }) => {
         const data = await response.json();
 
         setCategory(data);
+
+        localStorage.setItem("category", JSON.stringify(data));
       } catch (err) {
         throw err;
       }

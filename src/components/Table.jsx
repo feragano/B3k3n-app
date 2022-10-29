@@ -50,7 +50,7 @@ export const Table = ({
           <tbody>
             {bookFormToTableData.map((data, i) => {
               return (
-                <tr>
+                <tr key={data.id}>
                   <td>{i + 1}</td>
                   <td>{data.id}</td>
                   <td>{data.title}</td>
