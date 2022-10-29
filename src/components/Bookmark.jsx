@@ -50,7 +50,7 @@ export const Bookmark = ({ tableDataToBookmark }) => {
           >
             here
           </a>{" "}
-          to go back to the form
+          to go to the form page
         </p>
       </div>
     </>

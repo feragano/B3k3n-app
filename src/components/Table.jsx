@@ -92,7 +92,7 @@ export const Table = ({
           >
             here
           </a>{" "}
-          to go back to the form
+          to go the form page
         </p>
         <p className="text-gray-500 dark:text-gray-400  text-center">
           Click{" "}
