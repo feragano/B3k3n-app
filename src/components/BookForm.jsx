@@ -39,9 +39,6 @@ export const BookForm = ({ childToParent }) => {
 
         navigate("/table");
       } catch (err) {
-        alert(
-          "We didn't find any data or you might enter a non-available category ID!"
-        );
         throw err;
       }
     })();
